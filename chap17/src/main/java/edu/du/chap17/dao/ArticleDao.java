@@ -1,10 +1,7 @@
 package edu.du.chap17.dao;
 
 import edu.du.chap17.model.Article;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
+import org.apache.ibatis.annotations.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -45,8 +42,11 @@ public interface ArticleDao {
 			+ "set read_count = read_count + 1 "
 			+ "where article_id = #{articleId}")
 	public void increaseReadCount(int articleId);
+
 	public String selectLastSequenceNumber(String searchMaxSeqNum, String searchMinSeqNum);
 	public int update(Article article);
+	@Delete("delete from article " +
+			"where artice_id = #{articleId}")
 	public void delete(int articleId);
 
 

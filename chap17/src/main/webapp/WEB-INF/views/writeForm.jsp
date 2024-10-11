@@ -4,7 +4,7 @@
 <head><title>글쓰기</title></head>
 <body>
 
-<form action="<c:url value='/write.jsp' />" method="post">
+<form action="<c:url value='/write' />" method="post">
 제목: <input type="text" name="title" size="20"/> <br/>
 작성자: <input type="text" name="writerName" /> <br/>
 글암호: <input type="password" name="password" /> <br/>

@@ -1,14 +1,14 @@
 package edu.du.chap17;
 
 import edu.du.chap17.model.ArticleListModel;
-import edu.du.chap17.service.ArticleNotFoundException;
-import edu.du.chap17.service.ListArticleService;
-import edu.du.chap17.service.ReadArticleService;
+import edu.du.chap17.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class MyController {
@@ -17,6 +17,8 @@ public class MyController {
     ListArticleService listSerivce;
     @Autowired
     ReadArticleService readSerivce;
+    @Autowired
+    WriteArticleService writeSerivce;
 
     @GetMapping("/list")
     public String list(Model model, HttpServletRequest request) {
@@ -60,5 +62,25 @@ public class MyController {
         return "writeForm";
     }
 
+    // WritingRequest 사용해서 받아와서 수정해보기
+    @PostMapping("/write")
+    public String write(Model model,HttpServletRequest request) {
+        WritingRequest Wrequest= new WritingRequest(request.getParameter("title"),
+                request.getParameter("writerName"),
+                request.getParameter("content"),
+                request.getParameter("content"));
+        try {
+            writeSerivce.write(Wrequest);
+        } catch (IdGenerationFailedException e) {
+            throw new RuntimeException(e);
+        }
 
+        return "redirect:/list";
+    }
+
+    @GetMapping("/delete_form")
+    public String deleteForm(Model model, HttpServletRequest request) {
+        request.getParameter("aritcleId");
+        return "delete_form";
+    }
 }
