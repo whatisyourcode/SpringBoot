@@ -3,6 +3,7 @@ package edu.du.sb1014_2.service;
 
 
 import edu.du.sb1014_2.entity.entity.Board;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.List;
 

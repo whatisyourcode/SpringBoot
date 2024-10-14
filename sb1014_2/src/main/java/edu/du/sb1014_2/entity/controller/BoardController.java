@@ -6,9 +6,7 @@ import edu.du.sb1014_2.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -35,16 +33,16 @@ public class BoardController {
         return "/board/boardWrite";
     }
 
-    @RequestMapping("/board/insertBoard.do")
-    public String insertBoard(Board board) throws Exception{
-//		boardService.insertBoard(board);
+    @PostMapping("/board/insertBoard.do")
+    public String insertBoard(@ModelAttribute Board board) throws Exception{
+        boardService.insertBoard(board);
         return "redirect:/board/openBoardList.do";
     }
 
     @GetMapping("/board/openBoardDetail.do")
     public String openBoardDetail(@RequestParam int boardIdx, Model model) throws Exception{
-//		Board board = boardService.selectBoardDetail(boardIdx);
-//		model.addAttribute("board", board);
+		Board board = boardService.selectBoardDetail(boardIdx);
+		model.addAttribute("board", board);
         return "/board/boardDetail";
     }
 

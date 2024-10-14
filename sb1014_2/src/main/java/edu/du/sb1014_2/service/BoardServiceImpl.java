@@ -22,16 +22,16 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public void insertBoard(Board board) throws Exception {
-	// 	boardRepository.insertBoard(board);
+		System.out.println("Board Title: " + board.getTitle());
+		System.out.println("Board Contents: " + board.getContents());
+		System.out.println("Creator ID: " + board.getCreatorId());
+	 	boardRepository.insertBoard(board);
 	}
 
 	@Override
 	public Board selectBoardDetail(int boardIdx) throws Exception{
-
-		Board board = new Board();
-		//		Board board = boardRepository.selectBoardDetail(boardIdx);
-//		board.updateHitCount(boardIdx);
-
+		Board board = boardRepository.selectBoardDetail(boardIdx);
+		// board.updateHitCount(boardIdx);
 		return board;
 	}
 	

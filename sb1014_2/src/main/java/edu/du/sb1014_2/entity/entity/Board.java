@@ -1,9 +1,6 @@
 package edu.du.sb1014_2.entity.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -13,6 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,4 +31,13 @@ public class Board {
     private String updatedDatetime;
 
     private String deletedYn;
+
+    public Board(Integer boardIdx, String title, String contents, int hitCnt, String createdDatetime, String creatorId) {
+        this.boardIdx = boardIdx;
+        this.title = title;
+        this.contents = contents;
+        this.hitCnt = hitCnt;
+        this.createdDatetime = createdDatetime;
+        this.creatorId = creatorId;
+    }
 }
