@@ -11,5 +11,4 @@ public interface BoardRepository extends JpaRepository<Board, Integer> {
             "  FROM Board b WHERE b.deletedYn = 'N' ORDER BY b.boardIdx DESC")
     List<Board> selectBoardList();
 
-
 }
