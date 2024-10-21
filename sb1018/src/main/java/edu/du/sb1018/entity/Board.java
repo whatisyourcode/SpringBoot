@@ -1,19 +1,10 @@
-package edu.du.sb1014_2.entity.entity;
+package edu.du.sb1018.entity;
 
-<<<<<<< HEAD
 import lombok.*;
-=======
-<<<<<<< HEAD
-import lombok.*;
-=======
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
->>>>>>> 45cae153271cc652b263d717d2552c785d3542bf
->>>>>>> d4d7ae16605d49bd7a5a1ef84769e5ca736d2c50
+import net.bytebuddy.asm.Advice;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "t_board")
@@ -21,14 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
-<<<<<<< HEAD
 @Setter
-=======
-<<<<<<< HEAD
-@Setter
-=======
->>>>>>> 45cae153271cc652b263d717d2552c785d3542bf
->>>>>>> d4d7ae16605d49bd7a5a1ef84769e5ca736d2c50
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,19 +24,18 @@ public class Board {
 
     private int hitCnt;
 
+    @Column(nullable = false)
     private String creatorId;
 
+    @Column(nullable = false)
     private String createdDatetime;
 
     private String updaterId;
 
     private String updatedDatetime;
 
+    @Column(nullable = false)
     private String deletedYn;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> d4d7ae16605d49bd7a5a1ef84769e5ca736d2c50
 
     public Board(Integer boardIdx, String title, String contents, int hitCnt, String createdDatetime, String creatorId) {
         this.boardIdx = boardIdx;
@@ -62,9 +45,15 @@ public class Board {
         this.createdDatetime = createdDatetime;
         this.creatorId = creatorId;
     }
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 45cae153271cc652b263d717d2552c785d3542bf
->>>>>>> d4d7ae16605d49bd7a5a1ef84769e5ca736d2c50
+
+    // @PrePersist : 엔티티가 처음으로 데이터베이스에 저장되기 전에 호출되는 메서드로, 여기서 Not NUll 제약조건 필드를 초기화.
+    @PrePersist
+    public void prePersist() {
+        createdDatetime = String.valueOf(LocalDateTime.now());
+        creatorId = "admin";
+        deletedYn = "N";
+    }
+
+
+
 }

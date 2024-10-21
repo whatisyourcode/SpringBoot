@@ -1,22 +1,15 @@
-package edu.du.sb1014_2.entity.controller;
+package edu.du.sb1014_2.controller;
 
 
-import edu.du.sb1014_2.entity.entity.Board;
+import edu.du.sb1014_2.entity.Board;
 import edu.du.sb1014_2.service.BoardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.*;
-=======
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.*;
-=======
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
->>>>>>> 45cae153271cc652b263d717d2552c785d3542bf
->>>>>>> d4d7ae16605d49bd7a5a1ef84769e5ca736d2c50
 
 import java.util.List;
 
@@ -43,44 +36,23 @@ public class BoardController {
         return "/board/boardWrite";
     }
 
-<<<<<<< HEAD
-    @PostMapping("/board/insertBoard.do")
-    public String insertBoard(@ModelAttribute Board board) throws Exception{
-        boardService.insertBoard(board);
-=======
-<<<<<<< HEAD
-    @PostMapping("/board/insertBoard.do")
-    public String insertBoard(@ModelAttribute Board board) throws Exception{
-        boardService.insertBoard(board);
-=======
     @RequestMapping("/board/insertBoard.do")
-    public String insertBoard(Board board) throws Exception{
-//		boardService.insertBoard(board);
->>>>>>> 45cae153271cc652b263d717d2552c785d3542bf
->>>>>>> d4d7ae16605d49bd7a5a1ef84769e5ca736d2c50
+    public String insertBoard(Board board) throws Exception {
+		boardService.insertBoard(board);
         return "redirect:/board/openBoardList.do";
     }
 
     @GetMapping("/board/openBoardDetail.do")
-    public String openBoardDetail(@RequestParam int boardIdx, Model model) throws Exception{
-<<<<<<< HEAD
-		Board board = boardService.selectBoardDetail(boardIdx);
-		model.addAttribute("board", board);
-=======
-<<<<<<< HEAD
-		Board board = boardService.selectBoardDetail(boardIdx);
-		model.addAttribute("board", board);
-=======
-//		Board board = boardService.selectBoardDetail(boardIdx);
-//		model.addAttribute("board", board);
->>>>>>> 45cae153271cc652b263d717d2552c785d3542bf
->>>>>>> d4d7ae16605d49bd7a5a1ef84769e5ca736d2c50
+    public String openBoardDetail(@RequestParam int boardIdx, Model model) throws Exception {
+        Board board = boardService.selectBoardDetail(boardIdx);
+        boardService.hitCountUp(board.getBoardIdx());
+        model.addAttribute("board", board);
         return "/board/boardDetail";
     }
 
     @RequestMapping("/board/updateBoard.do")
-    public String updateBoard(Board board) throws Exception{
-//		boardService.updateBoard(board);
+    public String updateBoard(@ModelAttribute Board board) throws Exception{
+		boardService.updateBoard(board);
         return "redirect:/board/openBoardList.do";
     }
 

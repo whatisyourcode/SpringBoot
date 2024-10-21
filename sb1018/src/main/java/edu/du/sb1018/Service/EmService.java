@@ -18,20 +18,21 @@ public class EmService {
 
     public Dept updateDept(int deptNo,String deptName) {
     // 트랜잭션 시작
-    EntityManager em = emf.createEntityManager();
+        EntityManager em = emf.createEntityManager();
 
-    EntityTransaction transaction = em.getTransaction();
-    transaction.begin();
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
 
-    Dept dept = em.find(Dept.class, deptNo); // find == select
-    if(dept != null){
-        dept.setDname(deptName);
-        log.info("update dept {} with name {}",deptNo, deptName);
-    }else {
-        log.info("해당 {} 부서가 존재하지 않습니다.",deptNo);
+        Dept dept = em.find(Dept.class, deptNo); // find == select
+
+        if(dept != null){
+            dept.setDname(deptName);
+            log.info("update dept {} with name {}",deptNo, deptName);
+        }else {
+            log.info("해당 {} 부서가 존재하지 않습니다.",deptNo);
+        }
+
+        transaction.commit();
+        return dept;
     }
-
-    transaction.commit();
-    return dept;
-}
 }
